@@ -2,6 +2,9 @@
   <div class="layout">
     <nav-com></nav-com>
     <header-com></header-com>
+    <div class="content">
+      <router-view></router-view>
+    </div>
     <footer-com></footer-com>
   </div>
 </template>

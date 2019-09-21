@@ -1,16 +1,17 @@
 import layoutCom from "@/views/layout/layout";
-const Home = () => {
-  import(/* webpackChunkName: "fixed-Components" */ "@/views/Home");
-};
+// const Home = () => {
+//   import(/* webpackChunkName: "fixed-Components" */ "@/views/Home");
+// };
+import Home from "@/views/Home";
 const routers = [
   {
-    name: "",
+    name: "home",
     component: layoutCom,
-    path: "",
+    path: "/",
     children: [
       {
-        name: "",
-        path: "",
+        name: "home",
+        path: "/",
         component: Home
       }
     ]

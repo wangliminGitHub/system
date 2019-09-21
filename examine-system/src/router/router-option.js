@@ -1,4 +1,4 @@
-import routers from "./routers.js";
+import routes from "./routers.js";
 export default {
   base: process.env.BASE_URL,
   /**
@@ -8,5 +8,5 @@ export default {
   linkActiveClass: "router-link-active",
   linkExactActiveClass: "router-link-exact-active",
   mode: "hash",
-  routers
+  routes
 };

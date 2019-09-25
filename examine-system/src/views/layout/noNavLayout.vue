@@ -3,15 +3,10 @@
     <div class="content">
       <router-view></router-view>
     </div>
-    <footer-com></footer-com>
   </div>
 </template>
 <script>
-import footerCom from "@/components/layout/footer.vue";
 export default {
-  name: "layoutCom",
-  components: {
-    footerCom
-  }
+  name: "layoutCom"
 };
 </script>

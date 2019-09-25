@@ -4,9 +4,10 @@ import noNavLayout from "@/views/layout/noNavLayout"; // 没有Nav
 //   import(/* webpackChunkName: "fixed-Components" */ "@/views/examine/Home");
 // };
 import Home from "@/views/examine/Home";
-const Login = () => {
-  import(/* webpackChunkName: "fixed-Components" */ "@/views/Login");
-};
+// const Login = () => {
+//   import(/* webpackChunkName: "fixed-Components" */ "@/views/Login");
+// };
+import Login from "@/views/Login"
 // const ChooseIdentity = () => {
 //   import(
 //     /* webpackChunkName: "fixed-Components" */ "@/views/examine/basicIfor/choseIdentity"
@@ -29,7 +30,7 @@ const routers = [
   {
     name: "login",
     component: Login,
-    path: "login"
+    path: "/login"
   },
   {
     name: "chooseIdentity",

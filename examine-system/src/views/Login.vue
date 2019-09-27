@@ -23,74 +23,78 @@
   height: 100%;
 }
 .login-title {
-  font-size: 0.69rem;
+  text-align: center;
+  font-size: 2.6rem;
   font-weight: bold;
   color: #FFFFFF;
   font-family: 'PingFang-SC-Bold';
-  padding-top: 2.16rem;
+  padding-top: 81px;
   // line-height: 70px;
 }
 .top-box {
-  padding-top: 2.1rem;
+  padding-top: 79px;
 }
 .login-btn {
+  display: inherit;
+  text-align: center;
   background:linear-gradient(0deg,rgba(69,125,252,1) 0%,rgba(99,146,254,1) 100%);
-  width: 8rem;
+  width: calc(100% - 75px);
   margin: 0 auto;
-  height: 1.12rem;
+  height: 42px;
   border: none;
-  border-radius: 0.56rem;
-  margin-top: 1.25rem;
-  font-size: 0.42rem;
+  border-radius: 21px;
+  margin-top: 47px;
+  font-size: 1.6rem;
   font-weight:400;
   color:rgba(255,255,255,1);
 }
 .center-box {
-  padding-top: 0.4rem;
+  padding-top: 15px;
 }
 .login-verification-btn {
-  width: 2.8rem;
+  width: 105px;
 }
 .verification-btn {
   width: 100%;
-  border-radius: 0.56rem;
+  border-radius: 21px;
   border:1px solid rgba(99,146,254,1);
-  height: 1.12rem;
-  background:rgba(255,255,255,1);
-  opacity:0.18;
+  height: 42px;
+  background:rgba(255,255,255,0.18);
   cursor: pointer;
   color:rgba(255,254,254,1);
-  font-size: 0.42rem;
-  line-height: 1.12rem;
+  font-size: 1.6rem;
+  line-height: 42px;
   font-weight:400;
+  text-align: center;
 }
 .login-input {
-  width: 8rem;
+  width: calc(100% - 75px);
   margin: auto;
   display: flex;
   justify-content: space-between;
 }
 .my-input {
+  box-sizing: border-box;
   -webkit-appearance: none;
   background-color: transparent;
   background-image: none;
-  border-radius: 0.56rem;
+  border-radius: 21px;
   border: 1px solid #6392FE;
   box-sizing: border-box;
   color: #606266;
   display: inline-block;
-  font-size: 32px;
+  font-size: 3.2rem;
   font-family:PingFang SC;
   font-weight:400;
   color:rgba(153,153,153,1);
-  height: 1.12rem;
+  height: 42px;
   line-height: 1;
   outline: none;
-  padding: 0.34rem 0.41rem;
+  padding: 13px 16px;
   transition: border-color .2s cubic-bezier(.645,.045,.355,1);
   width: 100%;
 }
 .login-verification {
-  width: 4.8rem;
+  width: 180px;
 }
 </style>

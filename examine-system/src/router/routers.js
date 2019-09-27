@@ -13,7 +13,15 @@ import Login from "@/views/Login"
 //     /* webpackChunkName: "fixed-Components" */ "@/views/examine/basicIfor/choseIdentity"
 //   );
 // };
+import personalCenter from "@/views/personal/personalCenter";
+import noticeResultList from "@/views/notice/resultList";
+import noticeResultDetail from "@/views/notice/resultDetail";
 import ChooseIdentity from "@/views/examine/basicIfor/choseIdentity";
+import workInfo from "@/views/examine/basicIfor/workInfo";
+import studentInfo from "@/views/examine/basicIfor/studentInfo";
+import certificate from "@/views/examine/basicIfor/certificate";
+import signUpSuccess from "@/views/examine/basicIfor/signUpSuccess";
+
 const routers = [
   {
     name: "home",
@@ -24,6 +32,46 @@ const routers = [
         name: "home",
         path: "/",
         component: Home
+      },
+      {
+        name: "personalCenter",
+        path: "/personalCenter",
+        component: personalCenter
+      },
+      {
+        name: "noticeResultList",
+        path: "/noticeResultList",
+        component: noticeResultList
+      },
+      {
+        name: "noticeResultDetail",
+        path: "/noticeResultDetail",
+        component: noticeResultDetail
+      },
+      {
+        name: "chooseIndentity",
+        path: "/chooseIndentity",
+        component: ChooseIdentity
+      },
+      {
+        name: "workInfo",
+        path: "/workInfo",
+        component: workInfo
+      },
+      {
+        name: "studentInfo",
+        path: "/studentInfo",
+        component: studentInfo
+      },
+      {
+        name: "certificate",
+        path: "/certificate",
+        component: certificate
+      },
+      {
+        name: "signUpSuccess",
+        path: "/signUpSuccess",
+        component: signUpSuccess
       }
     ]
   },

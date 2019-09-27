@@ -1,0 +1,184 @@
+<template>
+  <!-- 步骤4 证明材料 -->
+  <div class="chose-identity">
+    <van-steps :active="active">
+      <van-step></van-step>
+      <van-step></van-step>
+      <van-step></van-step>
+      <van-step></van-step>
+    </van-steps>
+    <!-- 范本 -->
+    <div class="student-data">
+      <div class="certificate-cell">
+        <van-row>
+          <van-col span="8">
+            <div class="upload-div">
+              <van-uploader :after-read="upload1">
+                <div class="upload-img-style" v-if="uploadShow1">
+                  <img class="bg-img" src="@/assets/img/appImg/16.png" alt />
+                  <p>个人申请表</p>
+                </div>
+                <div class="upload-complete relative" v-else>
+                  <img :src="uploadImgUrl1" alt />
+                  <div class="upload-complete-text">重新上传</div>
+                </div>
+              </van-uploader>
+            </div>
+          </van-col>
+          <van-col span="16">
+            <div class="upload-div-text">
+              <p>个人申请表<span>需单位盖章，个人签字</span></p>
+              <p>
+                <span>下载</span>
+              </p>
+              <p>
+                <span>查看范本</span>
+              </p>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+       <div class="certificate-cell">
+        <van-row>
+          <van-col span="8">
+            <div class="upload-div">
+              <van-uploader :after-read="upload2">
+                <div class="upload-img-style" v-if="uploadShow2">
+                  <img class="bg-img" src="@/assets/img/appImg/16.png" alt />
+                  <p>个人承诺书</p>
+                </div>
+                <div class="upload-complete relative" v-else>
+                  <img :src="uploadImgUrl2" alt />
+                  <div class="upload-complete-text">重新上传</div>
+                </div>
+              </van-uploader>
+            </div>
+          </van-col>
+          <van-col span="16">
+            <div class="upload-div-text">
+              <p>个人承诺书<span>需个人签字</span></p>
+              <p>
+                <span>下载</span>
+              </p>
+              <p>
+                <span>查看范本</span>
+              </p>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+       <div class="certificate-cell">
+        <van-row>
+          <van-col span="8">
+            <div class="upload-div">
+              <van-uploader :after-read="upload3">
+                <div class="upload-img-style" v-if="uploadShow3">
+                  <img class="bg-img" src="@/assets/img/appImg/16.png" alt />
+                  <p>工作证明</p>
+                </div>
+                <div class="upload-complete relative" v-else>
+                  <img :src="uploadImgUrl3" alt />
+                  <div class="upload-complete-text">重新上传</div>
+                </div>
+              </van-uploader>
+            </div>
+          </van-col>
+          <van-col span="16">
+            <div class="upload-div-text">
+              <p>工作证明<span>需单位盖章</span></p>
+              <p>
+                <span>下载</span>
+              </p>
+              <p>
+                <span>查看范本</span>
+              </p>
+            </div>
+          </van-col>
+        </van-row>
+      </div>
+    </div>
+
+    <div class="confirm-btn-step-div">
+      <p class="confirm-btn-step">已完成，去缴费</p>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  name: "",
+  data() {
+    return {
+      active: 3,
+      name: "",
+      phone: "",
+      email: "",
+      uploadShow1: true,
+      uploadShow2: true,
+      uploadShow3: true,
+      uploadImgUrl1: "https://img.yzcdn.cn/vant/cat.jpeg",
+      uploadImgUrl2: "https://img.yzcdn.cn/vant/cat.jpeg",
+      uploadImgUrl3: "https://img.yzcdn.cn/vant/cat.jpeg"
+    };
+  },
+  methods: {
+    upload1(file) {
+      // 此时可以自行将文件上传至服务器
+      this.uploadImgUrl1 = file.content;
+      this.uploadShow1 = false;
+      console.log(file);
+    },
+     upload2(file) {
+      // 此时可以自行将文件上传至服务器
+      this.uploadImgUrl2 = file.content;
+      this.uploadShow2 = false;
+      console.log(file);
+    },
+     upload3(file) {
+      // 此时可以自行将文件上传至服务器
+      this.uploadImgUrl3 = file.content;
+      this.uploadShow3 = false;
+      console.log(file);
+    }
+  }
+};
+</script>
+<style lang="scss" scoped>
+.chose-identity {
+  padding: 0 15px;
+}
+.van-steps {
+  background: transparent;
+}
+.van-cell {
+  color: #666666;
+}
+.certificate-cell{
+    margin-bottom:10px;
+}
+.upload-div-text{
+    font-size:1.4rem;
+    color:#6392FE;
+    font-weight:400;
+    padding-left:8px;
+    p:nth-child(1){
+        color:#333333;
+        margin-top:14px;
+        span{
+            color:#999999;
+            font-size:1rem;
+            margin-left:5px;
+        }
+    }
+     p:nth-child(2){
+        margin-top:18px;
+    }
+      p:nth-child(3){
+        margin-top:7px;
+    }
+}
+
+
+
+</style>
+<style lang="scss">
+</style>

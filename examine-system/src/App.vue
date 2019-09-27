@@ -5,7 +5,7 @@
 </template>
 
 <style lang="scss">
-html, body {
+html,body {
   height: 100%;
 }
 #app {

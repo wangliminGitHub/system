@@ -7,7 +7,8 @@ import Home from "@/views/examine/Home";
 // const Login = () => {
 //   import(/* webpackChunkName: "fixed-Components" */ "@/views/Login");
 // };
-import Login from "@/views/Login"
+import Login from "@/views/Login";
+import SignUp from "@/views/examine/signUp";
 // const ChooseIdentity = () => {
 //   import(
 //     /* webpackChunkName: "fixed-Components" */ "@/views/examine/basicIfor/choseIdentity"
@@ -89,6 +90,18 @@ const routers = [
         name: "chooseIndentity",
         path: "/chooseIndentity",
         component: ChooseIdentity
+      }
+    ]
+  },
+  {
+    name: "signUp",
+    component: layoutCom,
+    path: "/signUp",
+    children: [
+      {
+        name: "signUp",
+        path: "/signUp",
+        component: SignUp
       }
     ]
   }

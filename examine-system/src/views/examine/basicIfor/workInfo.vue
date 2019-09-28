@@ -8,13 +8,13 @@
       <van-step></van-step>
     </van-steps>
     <div class="chose-identity-form">
-       <p class="work-title">请填写最近的一份工作信息</p>
+       <p class="work-title">工作经历请从最近一份开始填写</p>
       <van-cell-group>
         <van-field v-model="name" center clearable label="工作单位：" placeholder=""></van-field>
         <van-field v-model="phone" center clearable label="工作时间：" placeholder=""></van-field>
         <van-field v-model="email" center clearable label="职业类型：" placeholder=""></van-field>
         <van-field v-model="email" center clearable label="单位地址：" placeholder=""></van-field>
-        <van-field v-model="email" center clearable label="证  明 人：" placeholder=""></van-field>
+        <van-field v-model="email" center clearable label="证    明    人：" placeholder=""></van-field>
       </van-cell-group>
       <div class="add-cell text-center">
           <van-icon name="plus" />

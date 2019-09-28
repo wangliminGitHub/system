@@ -17,9 +17,9 @@
     <div class="student-data">
       <p class="student-data-title">
         无学信网资料学员
-        <span>点击这里</span>
+        <span @click="judgeShow=true">点击这里</span>
       </p>
-      <div class="upload-div">
+      <div class="upload-div" v-if="judgeShow">
         <van-uploader :after-read="upload1">
           <div class="upload-img-style" v-if="uploadShow1">
             <img class="bg-img" src="@/assets/img/appImg/16.png" alt />
@@ -48,7 +48,8 @@ export default {
       phone: "",
       email: "",
       uploadShow1: true,
-      uploadImgUrl1: "https://img.yzcdn.cn/vant/cat.jpeg"
+      uploadImgUrl1: "https://img.yzcdn.cn/vant/cat.jpeg",
+      judgeShow:false
     };
   },
   methods: {

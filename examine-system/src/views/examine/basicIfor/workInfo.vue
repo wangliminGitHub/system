@@ -23,14 +23,14 @@
     </div>
     
     <div class="confirm-btn-step-div">
-      <p class="confirm-btn-step">下一步</p>
+      <p class="confirm-btn-step" @click="next()">下一步</p>
     </div>
   </div>
 </template>
 <script>
 import addressInfo from "@/assets/common/area";
 export default {
-  name: "choseIdentity",
+  name: "studentInfo",
   data() {
     return {
       active: 1,
@@ -43,7 +43,11 @@ export default {
     };
   },
   methods: {
-    
+    next(){
+      this.$router.push({
+        path: "/studentInfo"
+      })
+    }
   }
 };
 </script>

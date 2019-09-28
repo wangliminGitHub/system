@@ -99,7 +99,7 @@
     </div>
 
     <div class="confirm-btn-step-div">
-      <p class="confirm-btn-step">已完成，去缴费</p>
+      <p class="confirm-btn-step" @click="submit()">已完成，去缴费</p>
     </div>
   </div>
 </template>
@@ -138,6 +138,11 @@ export default {
       this.uploadImgUrl3 = file.content;
       this.uploadShow3 = false;
       console.log(file);
+    },
+    submit(){
+       this.$router.push({
+        path: "/signUpSuccess"
+      })
     }
   }
 };

@@ -1,6 +1,6 @@
 <template>
   <div class="notice-result">
-    <div class="notice-result-cell">
+    <div class="notice-result-cell" @click="jumpDetail()">
       <van-row>
         <van-col span="4">
           <img class="notice-result-img" src="../../assets/img/appImg/notice-1.png" alt />
@@ -21,7 +21,19 @@
 
 <script>
 export default {
-  name: "noticeResult"
+  name: "noticeResultList",
+  data(){
+    return {
+
+    }
+  },
+  methods:{
+    jumpDetail (){
+      this.$router.push({
+        path: "/noticeResultDetail"
+      })
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

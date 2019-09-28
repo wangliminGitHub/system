@@ -4,7 +4,7 @@
       <div class="sign-up-success-content text-center">
           <van-icon name="checked" />
           <p>报名成功</p>
-          <span>查看我的考试</span>
+          <span @click="look()">查看我的考试</span>
       </div>
   </div>
 </template>
@@ -19,7 +19,11 @@ export default {
     };
   },
   methods: {
-    
+    look(){
+      this.$router.push({
+        path: "/personalCenter"
+      })
+    }
   }
 };
 </script>

@@ -52,11 +52,14 @@ export default {
     padding-bottom: 60px;
   }
   .examine-list {
-    padding: 16px;
+    padding: 11.5px 16px;
     background:rgba(255,255,255,1);
     border-radius: 0.266rem;
     display: flex;
     align-items: center;
+    .text-center{
+      margin-bottom:8px;
+    }
   }
   .list-img {
     width: 63px;
@@ -65,6 +68,7 @@ export default {
   .text-top {
     color:rgba(99,146,254,1);
     font-size: 1.6rem;
+    margin-bottom:10px;
   }
   .list-text {
     margin-left: 16px;

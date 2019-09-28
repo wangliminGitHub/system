@@ -86,7 +86,7 @@
       <p class="attention">*注：个人照片要求为两寸白底近期本人电子照</p>
     </div>
     <div class="confirm-btn-step-div">
-      <p class="confirm-btn-step">下一步</p>
+      <p class="confirm-btn-step" @click="next()">下一步</p>
     </div>
   </div>
 </template>
@@ -140,6 +140,11 @@ export default {
       this.uploadImgUrl2 = file.content;
       this.uploadShow2 = false;
       console.log(file);
+    },
+    next(){
+      this.$router.push({
+        path: "/workInfo"
+      })
     }
   }
 };

@@ -49,7 +49,7 @@
                     <span class="red">信息录入错误</span>
                   </p>
                 </div>
-                <span class="float-right update-btn">修改</span>
+                <span class="float-right update-btn" @click="update()">修改</span>
               </div>
 
               <p></p>
@@ -64,7 +64,19 @@
 // import footerCom from "@/components/layout/footer.vue";
 export default {
   name: "personalCenter",
-  components: {}
+  components: {},
+  data(){
+    return {
+
+    }
+  },
+  methods:{
+    update(){
+        this.$router.push({
+        path: "/chooseIndentity"
+      })
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>

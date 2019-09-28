@@ -34,7 +34,7 @@
     </div>
 
     <div class="confirm-btn-step-div">
-      <p class="confirm-btn-step">下一步</p>
+      <p class="confirm-btn-step" @click="next()">下一步</p>
     </div>
   </div>
 </template>
@@ -57,6 +57,11 @@ export default {
       this.uploadImgUrl1 = file.content;
       this.uploadShow1 = false;
       console.log(file);
+    },
+     next(){
+      this.$router.push({
+        path: "/certificate"
+      })
     }
   }
 };

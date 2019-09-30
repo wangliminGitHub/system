@@ -18,7 +18,7 @@
     <div class="student-data">
       <p class="student-data-title">
         无学信网资料学员
-        <span @click="judgeShow=true">点击这里</span>
+        <span @click="judgeShow=!judgeShow">点击这里</span>
       </p>
       <div class="upload-div" v-if="judgeShow">
         <van-uploader :after-read="upload1">

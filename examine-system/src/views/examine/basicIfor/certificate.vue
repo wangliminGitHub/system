@@ -27,18 +27,24 @@
           </van-col>
           <van-col span="16">
             <div class="upload-div-text">
-              <p>个人申请表<span>需单位盖章，个人签字</span></p>
               <p>
-                <span>下载</span>
+                个人申请表
+                <span>需单位盖章，个人签字</span>
               </p>
               <p>
-                <span>查看范本</span>
+                <a href="" download="" target="_blank">下载</a>
               </p>
+              <p>
+                <span @click="show1=true">查看范本</span>
+              </p>
+              <van-image-preview v-model="show1" :images="images1" @change="onChange1">
+                <template></template>
+              </van-image-preview>
             </div>
           </van-col>
         </van-row>
       </div>
-       <div class="certificate-cell">
+      <div class="certificate-cell">
         <van-row>
           <van-col span="8">
             <div class="upload-div">
@@ -56,18 +62,24 @@
           </van-col>
           <van-col span="16">
             <div class="upload-div-text">
-              <p>个人承诺书<span>需个人签字</span></p>
               <p>
-                <span>下载</span>
+                个人承诺书
+                <span>需个人签字</span>
               </p>
               <p>
-                <span>查看范本</span>
+                <a>下载</a>
               </p>
+              <p>
+                <span  @click="show2=true">查看范本</span>
+              </p>
+              <van-image-preview v-model="show2" :images="images2" @change="onChange2">
+                <template></template>
+              </van-image-preview>
             </div>
           </van-col>
         </van-row>
       </div>
-       <div class="certificate-cell">
+      <div class="certificate-cell">
         <van-row>
           <van-col span="8">
             <div class="upload-div">
@@ -85,13 +97,19 @@
           </van-col>
           <van-col span="16">
             <div class="upload-div-text">
-              <p>工作证明<span>需单位盖章</span></p>
               <p>
-                <span>下载</span>
+                工作证明
+                <span>需单位盖章</span>
               </p>
               <p>
-                <span>查看范本</span>
+                <a>下载</a>
               </p>
+              <p>
+                <span @click="show3=true">查看范本</span>
+              </p>
+              <van-image-preview v-model="show3" :images="images3" @change="onChange3">
+                <template></template>
+              </van-image-preview>
             </div>
           </van-col>
         </van-row>
@@ -117,8 +135,17 @@ export default {
       uploadShow3: true,
       uploadImgUrl1: "https://img.yzcdn.cn/vant/cat.jpeg",
       uploadImgUrl2: "https://img.yzcdn.cn/vant/cat.jpeg",
-      uploadImgUrl3: "https://img.yzcdn.cn/vant/cat.jpeg"
+      uploadImgUrl3: "https://img.yzcdn.cn/vant/cat.jpeg",
+      show1: false,
+      images1: ["http://bookexaln.jiankangpeini.com/sqb72zz.png"],
+      show2: false,
+      images2: ["http://bookexaln.jiankangpeini.com/cns72zz.png"],
+      show3: false,
+      images3: ["http://bookexaln.jiankangpeini.com/gzzm7fzz.png"],
+      imgData:''
     };
+  },
+  created(){
   },
   methods: {
     upload1(file) {
@@ -127,23 +154,26 @@ export default {
       this.uploadShow1 = false;
       console.log(file);
     },
-     upload2(file) {
+    upload2(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl2 = file.content;
       this.uploadShow2 = false;
       console.log(file);
     },
-     upload3(file) {
+    upload3(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl3 = file.content;
       this.uploadShow3 = false;
       console.log(file);
     },
-    submit(){
-       this.$router.push({
+    submit() {
+      this.$router.push({
         path: "/signUpSuccess"
-      })
-    }
+      });
+    },
+    onChange1(value) {},
+    onChange2(value) {},
+    onChange3(value) {}
   }
 };
 </script>
@@ -157,33 +187,33 @@ export default {
 .van-cell {
   color: #666666;
 }
-.certificate-cell{
-    margin-bottom:10px;
+.certificate-cell {
+  margin-bottom: 10px;
 }
-.upload-div-text{
-    font-size:1.4rem;
-    color:#6392FE;
-    font-weight:400;
-    padding-left:8px;
-    p:nth-child(1){
-        color:#333333;
-        margin-top:14px;
-        span{
-            color:#999999;
-            font-size:1rem;
-            margin-left:5px;
-        }
+.upload-div-text {
+  font-size: 1.4rem;
+  color: #6392fe;
+  font-weight: 400;
+  padding-left: 8px;
+  a{
+    color:#6392fe;
+  }
+  p:nth-child(1) {
+    color: #333333;
+    margin-top: 14px;
+    span {
+      color: #999999;
+      font-size: 1rem;
+      margin-left: 5px;
     }
-     p:nth-child(2){
-        margin-top:18px;
-    }
-      p:nth-child(3){
-        margin-top:7px;
-    }
+  }
+  p:nth-child(2) {
+    margin-top: 18px;
+  }
+  p:nth-child(3) {
+    margin-top: 7px;
+  }
 }
-
-
-
 </style>
 <style lang="scss">
 </style>

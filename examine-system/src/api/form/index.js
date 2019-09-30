@@ -76,10 +76,7 @@ export const studentInfo = function(params) {
   return axiosInstance({
     method: "post",
     url: "/user/info/xxw",
-    headers: {
-      "Content-Type": "multipart/form-data"
-    },
-    data: params
+    params: params
   });
 };
 

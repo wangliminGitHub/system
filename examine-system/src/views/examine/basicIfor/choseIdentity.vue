@@ -92,6 +92,14 @@
 </template>
 <script>
 import addressInfo from "@/assets/common/area";
+import {
+  commitForm,
+  getCardBack,
+  getCardFront,
+  judge,
+  uploadPersonalImg
+} from "@/api/form/index.js";
+
 export default {
   name: "choseIdentity",
   data() {
@@ -114,6 +122,11 @@ export default {
       columns: ["在校学生", "社会人士"]
     };
   },
+  created() {
+    judge().then(response => {
+      console.log(response);
+    });
+  },
   methods: {
     onConfirm(value) {
       this.identityValue = value;
@@ -127,24 +140,47 @@ export default {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl1 = file.content;
       this.uploadShow1 = false;
-      console.log(file);
+      var formData = new FormData();
+      formData.append("file_data", file.file);
+      getCardFront(formData).then(respnse => {
+        console.log(respnse);
+      });
     },
     upload2(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl2 = file.content;
       this.uploadShow2 = false;
-      console.log(file);
+      var formData = new FormData();
+      formData.append("file_data", file.file);
+      getCardBack(formData).then(respnse => {
+        console.log(respnse);
+      });
     },
     upload3(file) {
       // 此时可以自行将文件上传至服务器
-      this.uploadImgUrl2 = file.content;
-      this.uploadShow2 = false;
-      console.log(file);
-    },
-    next(){
-      this.$router.push({
-        path: "/workInfo"
+      this.uploadImgUrl3 = file.content;
+      this.uploadShow3 = false;
+      var formData = new FormData();
+      formData.append("file_data", file.file);
+      uploadPersonalImg(formData).then(response=>{
+        console.log(response)
       })
+    },
+    next() {
+      var params = {
+        examArea: this.addressValue,
+        personalIdentity: this.identityValue,
+        province: this.addressValue.split("/")[0],
+        userEmail: this.email,
+        userName: this.name,
+        userPhone: this.phone
+      };
+      commitForm(params).then(response => {
+        this.$router.push({
+          path: "/workInfo"
+        });
+      });
+      
     }
   }
 };
@@ -161,5 +197,4 @@ export default {
 }
 </style>
 <style lang="scss">
-
 </style>

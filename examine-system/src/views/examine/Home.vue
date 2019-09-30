@@ -2,36 +2,51 @@
   <div class="home">
     <div class="home-bg"></div>
     <div class="home-content">
-      <div class="examine-list" @click="goExamineInfor">
+      <div class="examine-list" @click="goExamineInfor(item.id)" v-for="(item,index) in dataList" :key="index">
         <div class="list-img">
-          <img src="./../../assets/img/appImg/19.png" alt="" class="list-img">
+          <img :src="item.examImg" alt="" class="list-img">
         </div>
         <div class="list-text">
-          <div class="text-top">秋季考试</div>
-          <div class="text-center">2019年9月8日</div>
+          <div class="text-top">{{item.examType}}</div>
+          <div class="text-center">{{item.examDate}}</div>
           <div class="text-bottom">
             <span>报名费用：</span>
-            <span>80</span>
+            <span>{{item.examMoney?item.examMoney:208}}</span>
           </div>
         </div>
         <div class="list-end">
-          <img src="./../../assets/img/appImg/18.png" alt="" class="end-img">
+          <!-- <img src="./../../assets/img/appImg/18.png" alt="" class="end-img"> -->
         </div>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
+import { getBannerImg,getAllExam } from "@/api/index/index.js";
 export default {
   name: "home",
   data () {
-    return {}
+    return {
+      dataList:[]
+    }
+  },
+  created(){
+    getBannerImg().then(response=>{
+
+    })
+    getAllExam().then(response=>{
+      this.dataList=response.data.data;
+    })
   },
   methods: {
-    goExamineInfor () {
+    goExamineInfor (id) {
       this.$router.push({
-        path: "/signUp"
+        path: "/signUp",
+        query:{
+          examId:id
+        }
       })
     }
   }

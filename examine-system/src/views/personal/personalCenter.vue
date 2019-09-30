@@ -31,7 +31,7 @@
             </van-col>
           </van-row>
         </div>
-        <div class="personal-cell personal-cell-not-through">
+        <!-- <div class="personal-cell personal-cell-not-through">
           <van-row>
             <van-col span="5">
               <img class="personal-cell-img" src="../../assets/img/appImg/20.png" alt />
@@ -55,7 +55,7 @@
               <p></p>
             </van-col>
           </van-row>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>

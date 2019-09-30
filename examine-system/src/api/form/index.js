@@ -91,3 +91,61 @@ export const uploadStudentImg = function(params) {
     data: params
   });
 };
+// 上传申请表
+export const appform = function(params) {
+  return axiosInstance({
+    method: "post",
+    url: "/user/info/appform",
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    data: params
+  });
+};
+// 上传承诺书
+export const commitment = function(params) {
+  return axiosInstance({
+    method: "post",
+    url: "/user/info/commitment",
+    headers: {
+      "Content-Type": "multipart/form-data"
+    },
+    data: params
+  });
+};
+// 上传工作证明
+export const employment = function(params) {
+  return axiosInstance({
+    method: "post",
+    url: "/user/info/employment",
+    data: params,
+    headers: {
+      "Content-Type": "multipart/form-data"
+    }
+  });
+};
+// 下载承诺书
+export const downLoadCommitment = function(params = {}) {
+  return axiosInstance({
+    method: "post",
+    url: "/user/info/cns",
+    data: params
+  });
+};
+// 下载申请表
+export const downLoadSqb = function(params = {}) {
+  return axiosInstance({
+    method: "post",
+    url: "/user/info/sqb",
+    data: params
+  });
+};
+// 下载工作证明
+export const dowmLoadGz = function(params = {}) {
+  return axiosInstance({
+    method: "post",
+    url: "/user/info/gzzm",
+    data: params
+  });
+};
+

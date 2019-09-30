@@ -32,7 +32,8 @@
                 <span>需单位盖章，个人签字</span>
               </p>
               <p>
-                <a href="" download="" target="_blank">下载</a>
+                <!-- <a href="" download="" target="_blank">下载</a> -->
+                <span @click="downloadApplication">下载</span>
               </p>
               <p>
                 <span @click="show1=true">查看范本</span>
@@ -67,7 +68,8 @@
                 <span>需个人签字</span>
               </p>
               <p>
-                <a>下载</a>
+                <!-- <a :href="bookUrl" download target="_blank">下载</a> -->
+                <span @click="downloadBook">下载</span>
               </p>
               <p>
                 <span  @click="show2=true">查看范本</span>
@@ -102,7 +104,7 @@
                 <span>需单位盖章</span>
               </p>
               <p>
-                <a>下载</a>
+                <span @click="downloadWork">下载</span>
               </p>
               <p>
                 <span @click="show3=true">查看范本</span>
@@ -122,6 +124,7 @@
   </div>
 </template>
 <script>
+import {appform, commitment, employment, downLoadCommitment, downLoadSqb, dowmLoadGz} from "@/api/form/index"
 export default {
   name: "",
   data() {
@@ -142,34 +145,90 @@ export default {
       images2: ["http://bookexaln.jiankangpeini.com/cns72zz.png"],
       show3: false,
       images3: ["http://bookexaln.jiankangpeini.com/gzzm7fzz.png"],
-      imgData:''
+      imgData:'',
+      bookUrl: ""
     };
   },
   created(){
+    // this.downloadBook()
   },
   methods: {
     upload1(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl1 = file.content;
       this.uploadShow1 = false;
-      console.log(file);
+      var formData = new FormData();
+      formData.append("file_data", file.file);
+      appform(formData).then(respnse => {
+        console.log(respnse);
+      });
     },
     upload2(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl2 = file.content;
       this.uploadShow2 = false;
-      console.log(file);
+      var formData = new FormData();
+      formData.append("file_data", file.file);
+      commitment(formData).then(respnse => {
+        console.log(respnse);
+      });
     },
     upload3(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl3 = file.content;
       this.uploadShow3 = false;
-      console.log(file);
+      var formData = new FormData();
+      formData.append("file_data", file.file);
+      employment(formData).then(respnse => {
+        console.log(respnse);
+      });
     },
     submit() {
       this.$router.push({
         path: "/signUpSuccess"
       });
+    },
+    downloadBook () {
+      let self = this
+      downLoadCommitment()
+        .then(res => {
+          if (res.data.status === 0) {
+            let url = res.data.data
+            self.bookUrl = res.data.data
+            self.createA(url)
+          }
+        })
+    },
+    createA (url) {
+      let aId = document.getElementById('down')
+        let link = document.createElement("a");
+        link.id = "down";
+        link.style.display = "none";
+        link.href = url;
+        link.setAttribute("download", "个人申请表");
+        link.click()
+    },
+    downloadApplication () {
+      let self = this
+      downLoadSqb()
+        .then(res => {
+          if (res.data.status === 0) {
+            let url = res.data.data
+            self.bookUrl = res.data.data
+            self.createA(url)
+          }
+        })
+    },
+    downloadWork () {
+      let self = this
+      dowmLoadGz()
+        .then(res => {
+          if (res.data.status === 0) {
+            let url = res.data.data
+            self.bookUrl = res.data.data
+            self.createA(url)
+          }
+        })
     },
     onChange1(value) {},
     onChange2(value) {},

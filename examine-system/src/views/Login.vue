@@ -53,6 +53,7 @@ export default {
         organization: location.split("?")[1].split("=")[1]
       };
       login(param).then(response => {
+        console.log(response, '======')
         var userInfor = response.data.data;
         settings.user.useInfor = userInfor;
         setUserInfor("userInfo", JSON.stringify(userInfor));

@@ -72,7 +72,7 @@
                 <span @click="downloadBook">下载</span>
               </p>
               <p>
-                <span  @click="show2=true">查看范本</span>
+                <span @click="show2=true">查看范本</span>
               </p>
               <van-image-preview v-model="show2" :images="images2" @change="onChange2">
                 <template></template>
@@ -124,7 +124,14 @@
   </div>
 </template>
 <script>
-import {appform, commitment, employment, downLoadCommitment, downLoadSqb, dowmLoadGz} from "@/api/form/index"
+import {
+  appform,
+  commitment,
+  employment,
+  downLoadCommitment,
+  downLoadSqb,
+  dowmLoadGz
+} from "@/api/form/index";
 export default {
   name: "",
   data() {
@@ -145,11 +152,14 @@ export default {
       images2: ["http://bookexaln.jiankangpeini.com/cns72zz.png"],
       show3: false,
       images3: ["http://bookexaln.jiankangpeini.com/gzzm7fzz.png"],
-      imgData:'',
-      bookUrl: ""
+      imgData: "",
+      bookUrl: "",
+      judgeFile1: false,
+      judgeFile2: false,
+      judgeFile3: false
     };
   },
-  created(){
+  created() {
     // this.downloadBook()
   },
   methods: {
@@ -158,9 +168,16 @@ export default {
       this.uploadImgUrl1 = file.content;
       this.uploadShow1 = false;
       var formData = new FormData();
+      this.$toast.loading({
+        mask: true,
+        message: "上传中..."
+      });
       formData.append("file_data", file.file);
-      appform(formData).then(respnse => {
-        console.log(respnse);
+      appform(formData).then(response => {
+        if (response.data.status == 0) {
+          this.judgeFile1 = true;
+          this.$toast("上传成功！");
+        }
       });
     },
     upload2(file) {
@@ -168,9 +185,16 @@ export default {
       this.uploadImgUrl2 = file.content;
       this.uploadShow2 = false;
       var formData = new FormData();
+      this.$toast.loading({
+        mask: true,
+        message: "上传中..."
+      });
       formData.append("file_data", file.file);
-      commitment(formData).then(respnse => {
-        console.log(respnse);
+      commitment(formData).then(response => {
+        if (response.data.status == 0) {
+          this.judgeFile2 = true;
+          this.$toast("上传成功！");
+        }
       });
     },
     upload3(file) {
@@ -178,57 +202,74 @@ export default {
       this.uploadImgUrl3 = file.content;
       this.uploadShow3 = false;
       var formData = new FormData();
+      this.$toast.loading({
+        mask: true,
+        message: "上传中..."
+      });
       formData.append("file_data", file.file);
-      employment(formData).then(respnse => {
-        console.log(respnse);
+      employment(formData).then(response => {
+        if (response.data.status == 0) {
+          this.judgeFile3 = true;
+          this.$toast("上传成功！");
+        }
       });
     },
     submit() {
+      if (!this.judgeFile1) {
+        this.$toast("个人申请表必须上传！");
+        return false;
+      }
+      if (!this.judgeFile2) {
+        this.$toast("个人承诺书必须上传！");
+        return false;
+      }
+      if (!this.judgeFile3) {
+        this.$toast("工作证明必须上传！");
+        return false;
+      }
+      // 目前没有这步的提交接口 暂时不写 直接跳转路径
       this.$router.push({
         path: "/signUpSuccess"
       });
     },
-    downloadBook () {
-      let self = this
-      downLoadCommitment()
-        .then(res => {
-          if (res.data.status === 0) {
-            let url = res.data.data
-            self.bookUrl = res.data.data
-            self.createA(url)
-          }
-        })
+    downloadBook() {
+      let self = this;
+      downLoadCommitment().then(res => {
+        if (res.data.status === 0) {
+          let url = res.data.data;
+          self.bookUrl = res.data.data;
+          self.createA(url);
+        }
+      });
     },
-    createA (url) {
-      let aId = document.getElementById('down')
-        let link = document.createElement("a");
-        link.id = "down";
-        link.style.display = "none";
-        link.href = url;
-        link.setAttribute("download", "个人申请表");
-        link.click()
+    createA(url) {
+      let aId = document.getElementById("down");
+      let link = document.createElement("a");
+      link.id = "down";
+      link.style.display = "none";
+      link.href = url;
+      link.setAttribute("download", "个人申请表");
+      link.click();
     },
-    downloadApplication () {
-      let self = this
-      downLoadSqb()
-        .then(res => {
-          if (res.data.status === 0) {
-            let url = res.data.data
-            self.bookUrl = res.data.data
-            self.createA(url)
-          }
-        })
+    downloadApplication() {
+      let self = this;
+      downLoadSqb().then(res => {
+        if (res.data.status === 0) {
+          let url = res.data.data;
+          self.bookUrl = res.data.data;
+          self.createA(url);
+        }
+      });
     },
-    downloadWork () {
-      let self = this
-      dowmLoadGz()
-        .then(res => {
-          if (res.data.status === 0) {
-            let url = res.data.data
-            self.bookUrl = res.data.data
-            self.createA(url)
-          }
-        })
+    downloadWork() {
+      let self = this;
+      dowmLoadGz().then(res => {
+        if (res.data.status === 0) {
+          let url = res.data.data;
+          self.bookUrl = res.data.data;
+          self.createA(url);
+        }
+      });
     },
     onChange1(value) {},
     onChange2(value) {},
@@ -254,8 +295,8 @@ export default {
   color: #6392fe;
   font-weight: 400;
   padding-left: 8px;
-  a{
-    color:#6392fe;
+  a {
+    color: #6392fe;
   }
   p:nth-child(1) {
     color: #333333;

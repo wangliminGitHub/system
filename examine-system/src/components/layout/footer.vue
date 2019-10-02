@@ -16,7 +16,7 @@
       <van-tabbar-item  to="/personalCenter">
         <div class="navbar-img-div">
           <img :src="active==2?active3:normal3" />
-          <p>通知</p>
+          <p>我的</p>
         </div>
       </van-tabbar-item>
     </van-tabbar>

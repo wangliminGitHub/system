@@ -7,8 +7,8 @@
         </van-col>
         <van-col span="20">
           <div class="personal-top-text">
-            <span>辛成武</span>
-            <img class="float-right" src="../../assets/img/appImg/pen.png" alt />
+            <span>未填写</span>
+            <!-- <img class="float-right" src="../../assets/img/appImg/pen.png" alt /> -->
           </div>
         </van-col>
       </van-row>
@@ -17,7 +17,7 @@
       <p class="title">我的考试</p>
       <div class="personal-div">
         <!--  -->
-        <div class="personal-cell">
+        <!-- <div class="personal-cell">
           <van-row>
             <van-col span="5">
               <img class="personal-cell-img" src="../../assets/img/appImg/20.png" alt />
@@ -30,7 +30,7 @@
               </p>
             </van-col>
           </van-row>
-        </div>
+        </div> -->
         <!-- <div class="personal-cell personal-cell-not-through">
           <van-row>
             <van-col span="5">

@@ -1,6 +1,6 @@
 <template>
   <div class="notice-result">
-    <div class="notice-result-cell" @click="jumpDetail()">
+    <!-- <div class="notice-result-cell" @click="jumpDetail()">
       <van-row>
         <van-col span="4">
           <img class="notice-result-img" src="../../assets/img/appImg/notice-1.png" alt />
@@ -15,7 +15,7 @@
           </div>
         </van-col>
       </van-row>
-    </div>
+    </div> -->
   </div>
 </template>
 

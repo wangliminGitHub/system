@@ -119,7 +119,10 @@ export default {
       uploadImgUrl2: "https://img.yzcdn.cn/vant/cat.jpeg",
       uploadImgUrl3: "https://img.yzcdn.cn/vant/cat.jpeg",
       areaList: addressInfo,
-      columns: ["在校学生", "社会人士"]
+      columns: ["在校学生", "社会人士"],
+      judgeFile1: false,
+      judgeFile2: false,
+      judgeFile3: false
     };
   },
   created() {
@@ -142,31 +145,104 @@ export default {
       this.uploadShow1 = false;
       var formData = new FormData();
       formData.append("file_data", file.file);
-      getCardFront(formData).then(respnse => {
-        console.log(respnse);
+      this.$toast.loading({
+        mask: true,
+        message: "上传中..."
       });
+      getCardFront(formData)
+        .then(response => {
+          if (response.data.status == 0) {
+            this.judgeFile1 = true;
+            this.$toast("上传成功！");
+          }
+        })
+        .catch(response => {
+          this.judgeFile1 = false;
+          this.$toast("请上传身份证人像面！");
+        });
     },
     upload2(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl2 = file.content;
       this.uploadShow2 = false;
       var formData = new FormData();
-      formData.append("file_data", file.file);
-      getCardBack(formData).then(respnse => {
-        console.log(respnse);
+      this.$toast.loading({
+        mask: true,
+        message: "上传中..."
       });
+      formData.append("file_data", file.file);
+      getCardBack(formData)
+        .then(response => {
+          if (response.data.status == 0) {
+            this.judgeFile2 = true;
+            this.$toast("上传成功！");
+          }
+        })
+        .catch(response => {
+          this.judgeFile2 = false;
+          this.$toast("请上传身份证国徽面！");
+        });
     },
     upload3(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl3 = file.content;
       this.uploadShow3 = false;
       var formData = new FormData();
+      this.$toast.loading({
+        mask: true,
+        message: "上传中..."
+      });
       formData.append("file_data", file.file);
-      uploadPersonalImg(formData).then(response=>{
-        console.log(response)
-      })
+      uploadPersonalImg(formData).then(response => {
+        if (response.data.status == 0) {
+          this.judgeFile3 = true;
+          this.$toast("上传成功！");
+        }
+      });
     },
     next() {
+      if (this.name == "") {
+        this.$toast("姓名不能为空！");
+        return false;
+      }
+      if (this.phone == "") {
+        this.$toast("联系方式不能为空！");
+        return false;
+      }
+      if (this.phone.length != 11) {
+        this.$toast("请输入正确的联系方式！");
+        return false;
+      }
+      if (this.email == "") {
+        this.$toast("邮箱不能为空！");
+        return false;
+      }
+      var myreg = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
+      if (!myreg.test(this.email)) {
+        this.$toast("请输入正确的邮箱！");
+        return false;
+      }
+      if (this.identityValue == "") {
+        this.$toast("本人身份不能为空！");
+        return false;
+      }
+      if (this.addressValue == "") {
+        this.$toast("报考地区不能为空！");
+        return false;
+      }
+      if (!this.judgeFile1) {
+        this.$toast("身份证人像面必须上传！");
+        return false;
+      }
+      if (!this.judgeFile2) {
+        this.$toast("身份证国徽面必须上传！");
+        return false;
+      }
+      if (!this.judgeFile3) {
+        this.$toast("本人近期电子照必须上传！");
+        return false;
+      }
+
       var params = {
         examArea: this.addressValue,
         personalIdentity: this.identityValue,
@@ -176,11 +252,14 @@ export default {
         userPhone: this.phone
       };
       commitForm(params).then(response => {
-        this.$router.push({
-          path: "/workInfo"
-        });
+        if (response.data.status != 0) {
+          this.$toast(response.data.msg);
+        } else {
+          this.$router.push({
+            path: "/workInfo"
+          });
+        }
       });
-      
     }
   }
 };

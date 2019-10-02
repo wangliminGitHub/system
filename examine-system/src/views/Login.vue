@@ -36,24 +36,52 @@ export default {
   },
   methods: {
     getCode() {
+      if(this.phone==""){
+         this.$toast("手机号不能为空！");
+         return false;
+      }
+      if(this.phone.length!=11){
+         this.$toast("请输入正确的手机号！");
+         return false;
+      }
       var param = {
         userPhone: this.phone
       };
+      
       getCode(param).then(response => {
-        console.log(response);
+         if(response.data.status==0){
+            this.$toast("验证码已发送，请查看您的手机！");
+         }
       });
     },
     login() {
-      window.location.herf =
-        "http://47.93.187.63:8080/user/enter?organization=报名机构名称";
-      var location = window.location.herf;
+       if(this.phone==""){
+         this.$toast("手机号不能为空！");
+         return false;
+      }
+      if(this.phone.length!=11){
+         this.$toast("请输入正确的手机号！");
+         return false;
+      }
+      if(this.code==""){
+         this.$toast("验证码不能为空！");
+         return false;
+      }
+      if(this.code.length!=6){
+         this.$toast("请输6位数的验证码！");
+         return false;
+      }
+      var location = window.location.href;
       var param = {
         phoneCode: this.code,
         username: this.phone,
-        organization: location.split("?")[1].split("=")[1]
+        organization: location.split("?")[1]?location.split("?")[1].split("=")[1]:'name'
       };
       login(param).then(response => {
-        console.log(response, '======')
+        if(response.data.status==1){
+             this.$toast(response.data.msg);
+             return false;
+        }
         var userInfor = response.data.data;
         settings.user.useInfor = userInfor;
         setUserInfor("userInfo", JSON.stringify(userInfor));

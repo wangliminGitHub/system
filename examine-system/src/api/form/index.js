@@ -49,7 +49,7 @@ export const commitForm = function(params) {
   return axiosInstance({
     method: "post",
     url: "/user/info/commit",
-    data: params
+    params: params
   });
 };
 

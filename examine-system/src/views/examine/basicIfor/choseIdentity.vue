@@ -88,6 +88,11 @@
     <div class="confirm-btn-step-div">
       <p class="confirm-btn-step" @click="next()">下一步</p>
     </div>
+    <div class="modal-div-van">
+      <van-overlay :show="showLoading" z-index="2">
+        <van-loading size="36px" color="#fff" vertical>上传比对中...</van-loading>
+      </van-overlay>
+    </div>
   </div>
 </template>
 <script>
@@ -122,7 +127,8 @@ export default {
       columns: ["在校学生", "社会人士"],
       judgeFile1: false,
       judgeFile2: false,
-      judgeFile3: false
+      judgeFile3: false,
+      showLoading: false
     };
   },
   created() {
@@ -145,43 +151,36 @@ export default {
       this.uploadShow1 = false;
       var formData = new FormData();
       formData.append("file_data", file.file);
-      this.$toast.loading({
-        mask: true,
-        message: "上传中..."
-      });
-      getCardFront(formData)
-        .then(response => {
-          if (response.data.status == 0) {
-            this.judgeFile1 = true;
-            this.$toast("上传成功！");
-          }
-        })
-        .catch(response => {
+      this.showLoading = true;
+      getCardFront(formData).then(response => {
+        this.showLoading = false;
+        if (response.data.status == 0) {
+          this.judgeFile1 = true;
+          this.$toast("上传成功！");
+        } else {
           this.judgeFile1 = false;
-          this.$toast("请上传身份证人像面！");
-        });
+          this.$toast(response.data.msg);
+        }
+      });
     },
     upload2(file) {
       // 此时可以自行将文件上传至服务器
       this.uploadImgUrl2 = file.content;
       this.uploadShow2 = false;
       var formData = new FormData();
-      this.$toast.loading({
-        mask: true,
-        message: "上传中..."
-      });
+      this.showLoading = true;
+
       formData.append("file_data", file.file);
-      getCardBack(formData)
-        .then(response => {
-          if (response.data.status == 0) {
-            this.judgeFile2 = true;
-            this.$toast("上传成功！");
-          }
-        })
-        .catch(response => {
+      getCardBack(formData).then(response => {
+        this.showLoading = false;
+        if (response.data.status == 0) {
+          this.judgeFile2 = true;
+          this.$toast("上传成功！");
+        } else {
           this.judgeFile2 = false;
-          this.$toast("请上传身份证国徽面！");
-        });
+          this.$toast(response.data.msg);
+        }
+      });
     },
     upload3(file) {
       // 此时可以自行将文件上传至服务器
@@ -276,4 +275,12 @@ export default {
 }
 </style>
 <style lang="scss">
+.modal-div-van {
+  .van-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
 </style>

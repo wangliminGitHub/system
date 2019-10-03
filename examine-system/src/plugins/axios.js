@@ -6,7 +6,6 @@ import { getUserInfor } from "@/utils/index.js";
 
 let config = {
   baseURL: settings.requestUrl,
-  timeout: 5000,
   withCredentials: true,
   headers: {
     "Content-Type": "application/json",

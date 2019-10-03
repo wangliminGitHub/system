@@ -9,10 +9,10 @@
         <div class="list-text">
           <div class="text-top">{{item.examType}}</div>
           <div class="text-center">{{item.examDate}}</div>
-          <div class="text-bottom">
+          <!-- <div class="text-bottom">
             <span>报名费用：</span>
             <span>{{item.examMoney?item.examMoney:208}}</span>
-          </div>
+          </div> -->
         </div>
         <div class="list-end">
           <!-- <img src="./../../assets/img/appImg/18.png" alt="" class="end-img"> -->

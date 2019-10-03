@@ -27,13 +27,15 @@
           placeholder="请选择时间"
           @click="item.showTimeEnd= true"
         />
-        <van-field
-          v-model="item.vocationalType"
-          center
-          clearable
+         <van-field
+          readonly
+          clickable
           label="职业类型："
-          placeholder="请填写职业类型"
-        ></van-field>
+          :value="item.vocationalType"
+          placeholder="请选择"
+          right-icon="arrow"
+          @click="showType(item)"
+        />
         <van-field v-model="item.unitArress" center clearable label="单位地址：" placeholder="请填写单位地址"></van-field>
         <van-field
           v-model="item.workCertifier"
@@ -61,6 +63,16 @@
             @confirm="confirm(item)"
           />
         </van-popup>
+         <!-- 选择 -->
+        <van-popup v-model="item.showType" position="bottom">
+        <van-picker
+          show-toolbar
+          :columns="columns"
+          @cancel="item.showType = false"
+          ref="picker"
+          @confirm="onConfirm(item,index)" 
+        />
+      </van-popup>
         <div class="text-center delete-cell" v-if="index>0" @click="deleteWorkInfo(index)">
           <van-icon name="cross" />删除职业信息
         </div>
@@ -69,6 +81,7 @@
         <van-icon name="plus" />增加职业信息
       </div>
     </div>
+
 
     <div class="confirm-btn-step-div">
       <p class="confirm-btn-step" @click="next()">下一步</p>
@@ -85,6 +98,7 @@ export default {
     return {
       active: 1,
       current: new Date(),
+      columns:["医生","护士","健康咨询","健康管理","其他"],
       dataList: [
         {
           workUnit: "",
@@ -94,13 +108,22 @@ export default {
           unitArress: "",
           workCertifier: "",
           showTimeStart: false,
-          showTimeEnd: false
+          showTimeEnd: false,
+          showType:false
         }
       ],
-      showTime: false
+      showTime: false,
     };
   },
   methods: {
+    showType(item){
+      item.showType = true;
+    },
+    onConfirm(item,index){
+      var value=this.$refs.picker[index].getValues()[0];
+      item.vocationalType=value;
+      item.showType= false;
+    },
     formatter(type, value) {
       if (type === "year") {
         return `${value}年`;
@@ -120,12 +143,12 @@ export default {
     changeTimeStart(e, current) {
       let year = current.getFullYear();
       let month = current.getMonth() + 1;
-      e.workingBefore = year + "-" + month;
+      e.workingBefore = year+'-'+month;
     },
     changeTimeEnd(e, current) {
       let year = current.getFullYear();
       let month = current.getMonth() + 1;
-      e.workingBehind = year + "-" + month;
+      e.workingBehind = year+'-'+month;
     },
     // 添加工作信息
     addWorkInfo() {
@@ -137,7 +160,8 @@ export default {
         unitArress: "",
         workCertifier: "",
         showTimeStart: false,
-        showTimeEnd: false
+        showTimeEnd: false,
+        showType: false
       });
     },
     deleteWorkInfo(index) {
@@ -154,6 +178,7 @@ export default {
           if (
             key != "showTimeStart" &&
             key != "showTimeEnd" &&
+            key != "showType" &&
             res[key] == ""
           ) {
             this.$toast("必填项不能为空");
@@ -186,6 +211,10 @@ export default {
       }
 
       let params = this.dataList;
+      params.forEach(res=>{
+        res.workingBefore=res.workingBefore.split('-').join('');
+        res.workingBehind=res.workingBehind.split('-').join('');
+      })
       commitWork(params).then(response => {
         if (response.data.status == 0) {
           this.$router.push({
